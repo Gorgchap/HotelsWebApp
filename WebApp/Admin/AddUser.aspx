@@ -15,15 +15,19 @@
 <body style="background-color: cornflowerblue">
     <admin:AdminNavbar runat="server"/>
     <div style="margin-top: 4.5rem; padding: 0 1rem">
-        <form runat="server">
-            <user:UserDataControl ID="Data" runat="server"/>
-            <label class="mt-3 mb-0">Password</label>
-            <asp:TextBox runat="server" ID="Password" CssClass="form-control mx-auto" TextMode="Password"/>
-            <div class="mt-3" style="display: flex; justify-content: center; align-items: center">
-                <asp:Button runat="server" ID="Add" Text="Add" CssClass="btn btn-primary"/>
-                <asp:Label ID="Output" runat="server" CssClass="ml-3"/>
+        <div class="row">
+            <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+                <form runat="server" class="card p-3">
+                    <user:UserDataControl ID="Data" runat="server"/>
+                    <label class="mt-3 mb-0">Password</label>
+                    <asp:TextBox runat="server" ID="Password" CssClass="form-control mx-auto" TextMode="Password"/>
+                    <div class="mt-3" style="display: flex; justify-content: center; align-items: center">
+                        <asp:Button runat="server" ID="Add" Text="Add" CssClass="btn btn-primary"/>
+                        <asp:Label ID="Output" runat="server" CssClass="ml-3"/>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </body>
 </html>

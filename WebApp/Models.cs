@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 
@@ -6,7 +7,7 @@ namespace WebApp
 {
     public static class Utils
     {
-        public static string CheckUserData(string login, string name, string surname, string email, string phone, List<User> users)
+        public static string CheckUserData(int id, string login, string name, string surname, string email, string phone, List<User> users)
         {
             string[] errors = new string[5]; string result = "";
             if (string.IsNullOrEmpty(login) || login.Length > 100) errors[0] = "login";
@@ -15,11 +16,16 @@ namespace WebApp
             if (string.IsNullOrEmpty(email) || !Regex.IsMatch(email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,10})*)(\.(\w){2,6})$")) errors[3] = "email";
             if (string.IsNullOrEmpty(phone) || !Regex.IsMatch(phone, @"^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$")) errors[4] = "phone";
             if (errors[0] == null && errors[3] == null && errors[4] == null)
+            {
+                int f = (from u in users where login == u.Login select u.Id).FirstOrDefault(), s = (from u in users where email == u.Email select u.Id).FirstOrDefault(),
+                    t = (from u in users where Regex.Replace(phone, "[^0-9]", "") == Regex.Replace(u.Phone, "[^0-9]", "") select u.Id).FirstOrDefault();
                 foreach (User u in users)
                 {
-                    if (login == u.Login) errors[0] = "login"; if (email == u.Email) errors[3] = "email";
-                    if (Regex.Replace(phone, "[^0-9]", "") == Regex.Replace(u.Phone, "[^0-9]", "")) errors[4] = "phone";
+                    if (f == u.Id && f != id) errors[0] = "login";
+                    if (s == u.Id && s != id) errors[3] = "email";
+                    if (t == u.Id && t != id) errors[4] = "phone";
                 }
+            }                
             foreach (string s in errors) if (!string.IsNullOrEmpty(s)) result += s + ", ";
             return result;
         }

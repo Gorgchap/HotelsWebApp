@@ -12,7 +12,7 @@ namespace WebApp
         }
         private void Add_Click(object sender, System.EventArgs e)
         {
-            string errors = Utils.CheckUserData(Data.Login, Data.Name, Data.Surname, Data.Email, Data.Phone, users);
+            string errors = Utils.CheckUserData(Data.UserId, Data.Login, Data.Name, Data.Surname, Data.Email, Data.Phone, users);
             if (errors.Length == 0)
                 using (HotelsContext context = new HotelsContext())
                 {
