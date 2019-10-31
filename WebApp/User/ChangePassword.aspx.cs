@@ -7,9 +7,8 @@ namespace WebApp
         readonly System.Collections.Generic.List<LoginUser> users = new System.Collections.Generic.List<LoginUser>();
         protected void Page_Load(object sender, System.EventArgs e)
         {
-            if (!string.IsNullOrEmpty(Output.Text)) Output.Text = "";
-            Submit.Click += Submit_Click; using HotelsContext context = new HotelsContext();
-            users.AddRange(from user in context.User.AsEnumerable() select new LoginUser(null, user.Login, user.PasswordHash));
+            if (!string.IsNullOrEmpty(Output.Text)) Output.Text = ""; Submit.Click += Submit_Click; using HotelsContext context = new HotelsContext();
+            users.AddRange(from u in context.User.AsEnumerable() select new LoginUser(null, u.Login, u.PasswordHash));
         }
         private void Submit_Click(object sender, System.EventArgs e)
         {

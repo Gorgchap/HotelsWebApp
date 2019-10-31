@@ -82,14 +82,17 @@
     <Content Include="Admin\AdminNavbar.ascx" />
     <Content Include="Admin\BookingsPage.aspx" />
     <Content Include="Admin\HotelsPage.aspx" />
+    <Content Include="Admin\RoomsPage.aspx" />
     <Content Include="User\ChangePassword.aspx" />
     <Content Include="UserDataControl.ascx" />
+    <Content Include="User\Hotels.aspx" />
+    <Content Include="User\Profile.aspx" />
     <Content Include="User\UserNavbar.ascx" />
     <Content Include="Admin\UsersPage.aspx" />
     <Content Include="Admin\EditUser.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Register.aspx" />
-    <Content Include="User\UserPage.aspx" />
+    <Content Include="User\Bookings.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +124,13 @@
     <Compile Include="Admin\HotelsPage.aspx.designer.cs">
       <DependentUpon>HotelsPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\RoomsPage.aspx.cs">
+      <DependentUpon>RoomsPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\RoomsPage.aspx.designer.cs">
+      <DependentUpon>RoomsPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="User\ChangePassword.aspx.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -134,6 +144,20 @@
     </Compile>
     <Compile Include="UserDataControl.ascx.designer.cs">
       <DependentUpon>UserDataControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="User\Hotels.aspx.cs">
+      <DependentUpon>Hotels.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\Hotels.aspx.designer.cs">
+      <DependentUpon>Hotels.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\Profile.aspx.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\Profile.aspx.designer.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
     </Compile>
     <Compile Include="User\UserNavbar.ascx.cs">
       <DependentUpon>UserNavbar.ascx</DependentUpon>
@@ -180,12 +204,12 @@
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
-    <Compile Include="User\UserPage.aspx.cs">
-      <DependentUpon>UserPage.aspx</DependentUpon>
+    <Compile Include="User\Bookings.aspx.cs">
+      <DependentUpon>Bookings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="User\UserPage.aspx.designer.cs">
-      <DependentUpon>UserPage.aspx</DependentUpon>
+    <Compile Include="User\Bookings.aspx.designer.cs">
+      <DependentUpon>Bookings.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -6,9 +6,8 @@ namespace WebApp
     {
         protected void Page_Load(object sender, System.EventArgs e)
         {
-            using HotelsContext context = new HotelsContext(); System.Collections.Generic.List<UserModel> list = new System.Collections.Generic.List<UserModel>();
-            list.AddRange(from u in context.User.AsEnumerable() where u.RoleId > 1 select new UserModel(u.Id, u.Login, u.Name, u.Surname, u.Email, u.Phone));
-            Users.DataSource = list; Users.DataBind();
+            using HotelsContext c = new HotelsContext(); Users.DataSource = (from u in c.User.AsEnumerable() where u.RoleId > 1
+                select new UserModel(u.Id, u.Login, u.Name, u.Surname, u.Email, u.Phone)).ToList(); Users.DataBind();
         }
     }
 }

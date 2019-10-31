@@ -7,11 +7,11 @@
 // </автоматически создаваемое>
 //------------------------------------------------------------------------------
 
-namespace WebApp
+namespace WebApp.Admin
 {
 
 
-    public partial class UserPage
+    public partial class RoomsPage
     {
     }
 }

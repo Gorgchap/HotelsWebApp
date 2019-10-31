@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Hotels WebApp</title>
@@ -15,5 +14,10 @@
 </head>
 <body style="background-color: cornflowerblue">
     <admin:AdminNavbar runat="server"/>
+    <div style="margin-top: 4.5rem; padding: 0 1rem">
+        <%--<h2 class="text-center">List of users</h2>--%>
+        <div class="card">
+        </div>
+    </div>
 </body>
 </html>
