@@ -82,6 +82,7 @@
     <Content Include="UserDataControl.ascx" />
     <Content Include="User\Hotels.aspx" />
     <Content Include="User\Profile.aspx" />
+    <Content Include="User\Rooms.aspx" />
     <Content Include="User\UserNavbar.ascx" />
     <Content Include="Admin\UsersPage.aspx" />
     <Content Include="Admin\EditUser.aspx" />
@@ -159,6 +160,13 @@
     </Compile>
     <Compile Include="User\Profile.aspx.designer.cs">
       <DependentUpon>Profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\Rooms.aspx.cs">
+      <DependentUpon>Rooms.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\Rooms.aspx.designer.cs">
+      <DependentUpon>Rooms.aspx</DependentUpon>
     </Compile>
     <Compile Include="User\UserNavbar.ascx.cs">
       <DependentUpon>UserNavbar.ascx</DependentUpon>

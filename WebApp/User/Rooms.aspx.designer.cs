@@ -11,16 +11,16 @@ namespace WebApp
 {
 
 
-    public partial class Hotels
+    public partial class Rooms
     {
 
         /// <summary>
-        /// Htls элемент управления.
+        /// Rms элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater Htls;
+        protected global::System.Web.UI.WebControls.Repeater Rms;
     }
 }
