@@ -1,4 +1,4 @@
-namespace WebApp
+namespace Context
 {
     using System.Data.Entity;
     public partial class HotelsContext : DbContext

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Context;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
@@ -58,13 +59,5 @@ namespace WebApp
         public string Email { get; }
         public string Phone { get; }
         public UserModel(int id, string login, string name, string surname, string email, string phone) { Id = id; Login = login; Name = name; Surname = surname; Email = email; Phone = phone; }
-    }
-
-    public class HotelModel
-    {
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public string Rating { get; set; }
-        public string Room { get; set; }
     }
 }

@@ -1,5 +1,5 @@
-﻿using System.Linq;
-
+﻿using Context;
+using System.Linq;
 namespace WebApp
 {
     public partial class ChangePassword : System.Web.UI.Page
@@ -20,7 +20,7 @@ namespace WebApp
                     User us = (from u in context.User where u.Login == user.Login select u).First();
                     us.PasswordHash = Utils.ConvertToSHA512(NewPwd.Text); context.SaveChanges();
                     Request.Cookies["token"].Value = Utils.MakeToken(us.Login, us.PasswordHash);
-                    Response.Redirect("UserPage.aspx"); return;
+                    Response.Redirect("Hotels.aspx"); return;
                 }
             Output.Text = "Wrong password has been entered";
         }

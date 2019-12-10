@@ -1,4 +1,4 @@
-namespace WebApp
+namespace Context
 {
     using System.ComponentModel.DataAnnotations.Schema;
 
