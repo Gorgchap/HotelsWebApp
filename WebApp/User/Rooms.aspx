@@ -33,7 +33,7 @@
                         <td><asp:label runat="server"><%# Eval("Price") %></asp:label></td>
                         <td><asp:label runat="server"><%# Eval("RoomType") %></asp:label></td>
                         <td class="font-weight-bold">
-                            <a class="text-info" href="#">Бронь</a>
+                            <a class="text-info" href="MakeBooking.aspx?id=<%# Eval("Id") %>">Бронь</a>
                         </td>
                     </tr>
                 </ItemTemplate>

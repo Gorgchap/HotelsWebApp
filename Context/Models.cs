@@ -22,12 +22,12 @@ namespace Context
         public string City { get; }
         public string Address { get; }
         public string Rating { get; }
-        public string Conveniences { get; }     
+        public string Conveniences { get; } 
         public HotelModel(int id, string name, string city, string address, int? rating, ICollection<ConvHotel> convs)
         {
             Id = id; Name = name; City = city; Address = address;
             for (int i = 0; i < max; i++) Rating += i < rating ? '★' : '☆';
-            Conveniences = string.Join("   ", convs.Select(c => c.Convenience.ConvName));
+            Conveniences = string.Join(" ", convs.Select(c => c.Convenience.ConvName));
         }
     }
 

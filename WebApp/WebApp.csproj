@@ -81,6 +81,7 @@
     <Content Include="User\ChangePassword.aspx" />
     <Content Include="UserDataControl.ascx" />
     <Content Include="User\Hotels.aspx" />
+    <Content Include="User\MakeBooking.aspx" />
     <Content Include="User\Profile.aspx" />
     <Content Include="User\Rooms.aspx" />
     <Content Include="User\UserNavbar.ascx" />
@@ -126,6 +127,7 @@
     <Compile Include="Admin\RoomsPage.aspx.designer.cs">
       <DependentUpon>RoomsPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="User\BookingDates.cs" />
     <Compile Include="User\Bookings.aspx.cs">
       <DependentUpon>Bookings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -153,6 +155,13 @@
     </Compile>
     <Compile Include="User\Hotels.aspx.designer.cs">
       <DependentUpon>Hotels.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\MakeBooking.aspx.cs">
+      <DependentUpon>MakeBooking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\MakeBooking.aspx.designer.cs">
+      <DependentUpon>MakeBooking.aspx</DependentUpon>
     </Compile>
     <Compile Include="User\Profile.aspx.cs">
       <DependentUpon>Profile.aspx</DependentUpon>
