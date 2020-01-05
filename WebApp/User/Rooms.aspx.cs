@@ -1,5 +1,5 @@
-﻿using Context;
-using System.Linq;
+﻿using Context; using System.Linq;
+
 namespace WebApp
 {
     public partial class Rooms : System.Web.UI.Page

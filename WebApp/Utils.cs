@@ -28,7 +28,7 @@ namespace WebApp
                 }
             }                
             foreach (string s in errors) if (!string.IsNullOrEmpty(s)) result += s + ", ";
-            return result;
+            return result.Length > 0 ? result.Remove(result.Length - 2) : result;
         }
 
         public static string ConvertToSHA512(string str)

@@ -1,5 +1,5 @@
-﻿using Context;
-using System.Linq;
+﻿using Context; using System.Linq;
+
 namespace WebApp
 {
     public partial class AddUser : System.Web.UI.Page
@@ -19,7 +19,7 @@ namespace WebApp
                         Email = Data.Email, Phone = Data.Phone, PasswordHash = Utils.ConvertToSHA512(Password.Text) });
                     c.SaveChanges(); Response.Redirect("UsersPage.aspx"); return;
                 }
-            Output.Text = "Add credentials (" + errors.Remove(errors.Length - 2) + ") have been rejected"; Output.ForeColor = System.Drawing.Color.Red;
+            Output.Text = "Add credentials (" + errors + ") have been rejected"; Output.ForeColor = System.Drawing.Color.Red;
         }
     }
 }

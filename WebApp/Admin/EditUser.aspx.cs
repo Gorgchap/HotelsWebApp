@@ -1,5 +1,5 @@
-﻿using Context;
-using System.Linq;
+﻿using Context; using System.Linq;
+
 namespace WebApp
 {
     public partial class EditUser : System.Web.UI.Page
@@ -20,7 +20,7 @@ namespace WebApp
                     u.Login = Data.Login; u.Name = Data.Name; u.Surname = Data.Surname; u.Email = Data.Email;
                     u.Phone = Data.Phone; context.SaveChanges(); Response.Redirect("UsersPage.aspx"); return;
                 }
-            Output.Text = "Edit credentials (" + errors.Remove(errors.Length - 2) + ") have been rejected"; Output.ForeColor = System.Drawing.Color.Red;
+            Output.Text = "Edit credentials (" + errors + ") have been rejected"; Output.ForeColor = System.Drawing.Color.Red;
         }
     }
 }

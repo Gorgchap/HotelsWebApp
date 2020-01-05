@@ -1,9 +1,8 @@
-﻿using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿using System.Web.UI.WebControls;
 
 namespace WebApp
 {
-    [ToolboxData("<{0}:BookingDates runat=server></{0}:BookingDates>")]
+    [System.Web.UI.ToolboxData("<{0}:BookingDates runat=server></{0}:BookingDates>")]
     public class BookingDates : Panel
     {
         private readonly Label from = new Label() { Text = "C " }, to = new Label() { Text = "По " };

@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using Context; using System.Linq;
 
 namespace WebApp
 {
@@ -13,9 +13,9 @@ namespace WebApp
         protected void Page_Load(object sender, System.EventArgs e)
         {
             if (!IsPostBack && UserId > 0)
-                using (Context.HotelsContext context = new Context.HotelsContext())
+                using (HotelsContext context = new HotelsContext())
                 {
-                    Context.User u = (from user in context.User where user.Id == UserId select user).First();
+                    User u = (from user in context.User where user.Id == UserId select user).First();
                     Login = u.Login; Name = u.Name; Surname = u.Surname; Email = u.Email; Phone = u.Phone;
                 }
         }

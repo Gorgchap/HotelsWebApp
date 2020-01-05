@@ -1,5 +1,5 @@
-﻿using Context;
-using System.Linq;
+﻿using Context; using System.Linq;
+
 namespace WebApp
 {
     public partial class Profile : System.Web.UI.Page
@@ -22,7 +22,7 @@ namespace WebApp
                     c.SaveChanges(); Response.Cookies["token"].Value = Utils.MakeToken(u.Login, u.PasswordHash);
                     Response.Redirect("Hotels.aspx"); return;
                 }
-            Output.Text = "New profile credentials (" + errors.Remove(errors.Length - 2) + ") have been rejected"; Output.ForeColor = System.Drawing.Color.Red;
+            Output.Text = "New profile credentials (" + errors + ") have been rejected"; Output.ForeColor = System.Drawing.Color.Red;
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using Context;
-using System.Linq;
+﻿using Context; using System.Linq;
+
 namespace WebApp
 {
     public partial class Register : System.Web.UI.Page
@@ -14,7 +14,7 @@ namespace WebApp
         private void Submit_Click(object sender, System.EventArgs e)
         {
             string errors = Utils.CheckUserData(0, LogIn.Text, Name.Text, Surname.Text, Email.Text, Phone.Text, users);
-            errors += Pwd.Text != Pwd2.Text || string.IsNullOrEmpty(Pwd.Text) || string.IsNullOrEmpty(Pwd2.Text) ? "password, " : "";          
+            errors += Pwd.Text != Pwd2.Text || string.IsNullOrEmpty(Pwd.Text) || string.IsNullOrEmpty(Pwd2.Text) ? ", password" : "";    
             if (errors.Length == 0)
             {
                 using HotelsContext context = new HotelsContext();
@@ -25,7 +25,7 @@ namespace WebApp
                 });
                 context.SaveChanges(); LoginPage_Click(null, null); return;
             }
-            Output.Text = "Register credentials (" + errors.Remove(errors.Length - 2) + ") have been rejected"; Output.ForeColor = System.Drawing.Color.Red;
+            Output.Text = "Register credentials (" + errors + ") have been rejected"; Output.ForeColor = System.Drawing.Color.Red;
         }
     }
 }
