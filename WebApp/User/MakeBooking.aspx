@@ -28,18 +28,17 @@
        </div>
     </div>
     <script type="text/javascript">
-        const begin = document.getElementById("begin"), end = document.getElementById("end");
+        const begin = document.getElementById("begin"), end = document.getElementById("end"), f = "DD.MM.YYYY";
         isInvalid = str => {
             const arr = str.split('.');
-            if (/[^\d.]/.test(str) || arr.length !== 3 || arr.some(x => x === '') ||
-                ![1, 2].includes(arr[0].length) || ![1, 2].includes(arr[1].length) || ![2, 4].includes(arr[2].length) ||
-                (arr[2].length === 2 && moment(str, "DD.MM.YYYY").isAfter(moment("01.01.2050", "DD.MM.YYYY"))) ||
-                !moment(str, "DD.MM.YYYY")._isValid) {
+            if (/[^\d.]/.test(str) || arr.length !== 3 || arr.some(x => x === '') || ![1, 2].includes(arr[0].length) ||
+                ![1, 2].includes(arr[1].length) || ![2, 4].includes(arr[2].length) || (arr[2].length === 2 &&
+                moment(str, f).isSameOrAfter(moment("01.01.2050", f), 'day')) || !moment(str, f)._isValid) {
                 return true;
             }
             return false;
         }
-        viceVersa = () => moment(begin.value, "DD.MM.YYYY").isAfter(moment(end.value, "DD.MM.YYYY"));
+        viceVersa = () => moment(begin.value, f).isSameOrAfter(moment(end.value, f), 'day');
         $("#begin").on("input", e => {
             begin.style.backgroundColor = isInvalid(e.target.value) || isInvalid(end.value)
                 ? '#ff4444' : viceVersa() ? '#e1ff00' : '#77ff99';
