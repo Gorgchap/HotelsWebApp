@@ -38,18 +38,16 @@
             }
             return false;
         }
-        viceVersa = () => moment(begin.value, f).isSameOrAfter(moment(end.value, f), 'day');
+        warn = () => moment(begin.value, f).isBefore(moment().add(1, 'days'), 'day') ||
+                     moment(end.value, f).isBefore(moment().add(8, 'days'), 'day') ||
+                     moment(begin.value, f).isSameOrAfter(moment(end.value, f), 'day');
         $("#begin").on("input", e => {
-            begin.style.backgroundColor = isInvalid(e.target.value) || isInvalid(end.value)
-                ? '#ff4444' : viceVersa() ? '#e1ff00' : '#77ff99';
-            end.style.backgroundColor = isInvalid(e.target.value) || isInvalid(end.value)
-                ? '#ff4444' : viceVersa() ? '#e1ff00' : '#77ff99';
+            begin.style.backgroundColor = isInvalid(e.target.value) || isInvalid(end.value) ? '#ff4444' : warn() ? '#e1ff00' : '#77ff99';
+            end.style.backgroundColor = isInvalid(e.target.value) || isInvalid(end.value) ? '#ff4444' : warn() ? '#e1ff00' : '#77ff99';
         });
         $("#end").on("input", e => {
-            begin.style.backgroundColor = isInvalid(e.target.value) || isInvalid(begin.value)
-                ? '#ff4444' : viceVersa() ? '#e1ff00' : '#77ff99';
-            end.style.backgroundColor = isInvalid(e.target.value) || isInvalid(begin.value)
-                ? '#ff4444' : viceVersa() ? '#e1ff00' : '#77ff99';
+            begin.style.backgroundColor = isInvalid(e.target.value) || isInvalid(begin.value) ? '#ff4444' : warn() ? '#e1ff00' : '#77ff99';
+            end.style.backgroundColor = isInvalid(e.target.value) || isInvalid(begin.value) ? '#ff4444' : warn() ? '#e1ff00' : '#77ff99';
         });
     </script>
 </body>
