@@ -15,9 +15,12 @@
 <body style="background-color: cornflowerblue">
     <admin:AdminNavbar runat="server"/>
     <div style="margin-top: 4.5rem; padding: 0 1rem">
-        <%--<h2 class="text-center">List of users</h2>--%>
+        <h2 class="text-center">List of hotels</h2>
         <div class="card">
         </div>
     </div>
+    <script>
+        $.get({ url: "https://localhost:44394/api/hotels/", success: function(data) { console.log(data); } });
+    </script>
 </body>
 </html>

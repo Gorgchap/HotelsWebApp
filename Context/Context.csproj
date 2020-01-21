@@ -56,11 +56,14 @@
     <Compile Include="Database\ConvHotel.cs" />
     <Compile Include="Database\Hotel.cs" />
     <Compile Include="Database\HotelsContext.cs" />
+    <Compile Include="Interfaces.cs" />
     <Compile Include="Models.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Database\Role.cs" />
     <Compile Include="Database\Room.cs" />
     <Compile Include="Database\User.cs" />
+    <Compile Include="Services.cs" />
+    <Compile Include="TestHotelService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

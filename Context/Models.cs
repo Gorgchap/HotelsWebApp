@@ -39,4 +39,10 @@ namespace Context
         public string RoomType { get; }
         public RoomModel(int id, int? number, int? price, string type) { Id = id; Number = number; Price = price; RoomType = type; }
     }
+
+    public class PagedResult<T>
+    {
+        public int PageCount { get; set; }
+        public T[] Page;
+    }
 }
