@@ -26,7 +26,7 @@ namespace WebApp
                 if (Utils.MakeToken(user.Login, user.PasswordHash) == Request.Cookies["token"].Value)
                 {
                     c.Booking.Add(new Booking() { RoomId = RoomId, DateBegin = Data.BeginDate, DateEnd = Data.EndDate,
-                        User = user }); c.SaveChanges(); Response.Redirect("Bookings.aspx"); return;
+                        UserId = user.Id }); c.SaveChanges(); Response.Redirect("Bookings.aspx"); return;
                 }
         }
     }

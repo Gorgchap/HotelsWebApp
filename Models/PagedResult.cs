@@ -2,7 +2,8 @@
 {
     public class PagedResult<T>
     {
-        public int PageCount { get; set; }
-        public T[] Page;
+        public T[] Page { get; }
+        public int PageCount { get; }
+        public PagedResult(T[] page, int count) { Page = page; PageCount = count; }
     }
 }

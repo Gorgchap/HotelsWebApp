@@ -81,8 +81,13 @@
     <Content Include="Admin\AddUser.aspx" />
     <Content Include="Admin\AdminNavbar.ascx" />
     <Content Include="Admin\BookingsPage.aspx" />
+    <Content Include="Admin\frontend\hotel-info.html" />
+    <Content Include="Admin\frontend\hotel-item.html" />
+    <Content Include="Admin\frontend\spinner.html" />
     <Content Include="Admin\HotelsPage.aspx" />
     <Content Include="Admin\RoomsPage.aspx" />
+    <Content Include="Admin\frontend\hotels.js" />
+    <Content Include="Admin\frontend\jquery.tmpl.min.js" />
     <Content Include="User\Bookings.aspx" />
     <Content Include="User\ChangePassword.aspx" />
     <Content Include="UserDataControl.ascx" />
@@ -243,6 +248,7 @@
       <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

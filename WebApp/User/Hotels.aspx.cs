@@ -8,7 +8,6 @@ namespace WebApp
         {
             using HotelsContext c = new HotelsContext(); Htls.DataSource = (from h in c.Hotel.AsEnumerable()
                 select new Models.HotelModel(h.Id, h.Name, h.City, h.Address, h.Rating)).ToList(); Htls.DataBind();
-
         }
     }
 }

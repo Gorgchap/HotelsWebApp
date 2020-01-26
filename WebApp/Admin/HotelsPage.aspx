@@ -9,6 +9,7 @@
     <title>Hotels WebApp</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="frontend/jquery.tmpl.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
@@ -16,11 +17,21 @@
     <admin:AdminNavbar runat="server"/>
     <div style="margin-top: 4.5rem; padding: 0 1rem">
         <h2 class="text-center">List of hotels</h2>
-        <div class="card">
+        <div class="card" id="results">
+            <table class="table table-hover text-center mb-0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>City</th>
+                        <th>Address</th>
+                        <th>Rating</th>
+                        <th><a class="text-success">Add new</a></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
     </div>
-    <script>
-        $.get({ url: "https://localhost:44394/api/hotels/", success: function(data) { console.log(data); } });
-    </script>
+    <script src="./frontend/hotels.js"></script>
 </body>
 </html>
