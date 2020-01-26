@@ -7,7 +7,7 @@ namespace WebApp
         protected void Page_Load(object sender, System.EventArgs e)
         {
             using HotelsContext c = new HotelsContext(); Htls.DataSource = (from h in c.Hotel.AsEnumerable()
-                select new HotelModel(h.Id, h.Name, h.City, h.Address, h.Rating, h.ConvHotel)).ToList(); Htls.DataBind();
+                select new Models.HotelModel(h.Id, h.Name, h.City, h.Address, h.Rating)).ToList(); Htls.DataBind();
 
         }
     }

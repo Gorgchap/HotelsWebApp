@@ -238,6 +238,10 @@
       <Project>{69e76023-b646-4f69-9589-f99a71a84507}</Project>
       <Name>Context</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{b946832b-4b28-44bd-bb94-4eb4a0802069}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

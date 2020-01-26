@@ -25,7 +25,6 @@
                         <th>Город</th>
                         <th>Адрес</th>
                         <th>Рейтинг</th>
-                        <th>Удобства</th>
                         <th>Номера</th>
                     </tr>
                 </HeaderTemplate>
@@ -35,7 +34,6 @@
                         <td><asp:label runat="server"><%# Eval("City") %></asp:label></td>
                         <td><asp:label runat="server"><%# Eval("Address") %></asp:label></td>
                         <td><asp:label runat="server"><%# Eval("Rating") %></asp:label></td>
-                        <td><asp:label runat="server"><%# Eval("Conveniences") %></asp:label></td>
                         <td class="font-weight-bold">
                             <a class="text-info" href="Rooms.aspx?id=<%# DataBinder.Eval(Container.DataItem, "Id") %>">Список номеров</a>
                         </td>
