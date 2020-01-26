@@ -1,5 +1,3 @@
-using System;
-
 namespace Services.Areas.HelpPage
 {
     /// <summary>
@@ -11,31 +9,14 @@ namespace Services.Areas.HelpPage
         /// Initializes a new instance of the <see cref="ImageSample"/> class.
         /// </summary>
         /// <param name="src">The URL of an image.</param>
-        public ImageSample(string src)
-        {
-            if (src == null)
-            {
-                throw new ArgumentNullException("src");
-            }
-            Src = src;
-        }
+        public ImageSample(string src) { Src = src ?? throw new System.ArgumentNullException("src"); }
 
         public string Src { get; private set; }
 
-        public override bool Equals(object obj)
-        {
-            ImageSample other = obj as ImageSample;
-            return other != null && Src == other.Src;
-        }
+        public override bool Equals(object obj) => obj is ImageSample other && Src == other.Src;
 
-        public override int GetHashCode()
-        {
-            return Src.GetHashCode();
-        }
+        public override int GetHashCode() => Src.GetHashCode();
 
-        public override string ToString()
-        {
-            return Src;
-        }
+        public override string ToString() => Src;
     }
 }

@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Context;
+using Models;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -15,38 +15,48 @@ namespace Services.Controllers
         public HotelsController(Interfaces.IHotelsService service) { _service = service; }
 
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        public HttpResponseMessage Get()
-        {
-            return Request.CreateResponse(HttpStatusCode.OK, _service.GetHotels(), Configuration.Formatters.JsonFormatter);
-        }
+        public HttpResponseMessage Get(int page = 1, int pageLen = 5) => Request.CreateResponse(HttpStatusCode.OK, _service.GetHotels(page, pageLen), Configuration.Formatters.JsonFormatter);
 
-        // GET api/orders/5
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        public string Get(int id)
+        public HttpResponseMessage Get(int id)
         {
-            return "order";
+            using (HotelsContext c = new HotelsContext())
+            {
+                Hotel hotel = (from h in c.Hotel where h.Id == id select h).FirstOrDefault();
+                if (hotel == null) return Request.CreateResponse(HttpStatusCode.NotFound);
+                HotelModel model = new HotelModel(hotel.Id, hotel.Name, hotel.City, hotel.Address, hotel.Rating);
+                return Request.CreateResponse(HttpStatusCode.OK, model, Configuration.Formatters.JsonFormatter);
+            }
         }
 
-        // POST api/orders
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [HttpPost]
         public void Post([FromBody]string order)
         {
         }
 
-        // PUT api/orders/5
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [HttpPut]
         public void Put(int id, [FromBody]string order)
         {
         }
 
-        // DELETE api/orders/5
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [HttpDelete]
         public HttpResponseMessage Delete(int id)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                using (HotelsContext c = new HotelsContext())
+                {
+                    Hotel hotel = (from h in c.Hotel where h.Id == id select h).FirstOrDefault();
+                    if (hotel == null) return Request.CreateResponse(HttpStatusCode.NotFound);
+                    c.Hotel.Remove(hotel); c.SaveChanges();
+                    return Request.CreateResponse(HttpStatusCode.OK);
+                }
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException dbex) { return Request.CreateResponse(HttpStatusCode.Conflict, dbex.ToString()); }
+            catch (System.Exception e) { return Request.CreateResponse(HttpStatusCode.InternalServerError, e.ToString()); }
         }
     }
 }

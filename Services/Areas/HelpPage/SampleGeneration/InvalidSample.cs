@@ -1,5 +1,3 @@
-using System;
-
 namespace Services.Areas.HelpPage
 {
     /// <summary>
@@ -7,31 +5,14 @@ namespace Services.Areas.HelpPage
     /// </summary>
     public class InvalidSample
     {
-        public InvalidSample(string errorMessage)
-        {
-            if (errorMessage == null)
-            {
-                throw new ArgumentNullException("errorMessage");
-            }
-            ErrorMessage = errorMessage;
-        }
+        public InvalidSample(string errorMessage) { ErrorMessage = errorMessage ?? throw new System.ArgumentNullException("errorMessage"); }
 
         public string ErrorMessage { get; private set; }
 
-        public override bool Equals(object obj)
-        {
-            InvalidSample other = obj as InvalidSample;
-            return other != null && ErrorMessage == other.ErrorMessage;
-        }
+        public override bool Equals(object obj) => obj is InvalidSample other && ErrorMessage == other.ErrorMessage;
 
-        public override int GetHashCode()
-        {
-            return ErrorMessage.GetHashCode();
-        }
+        public override int GetHashCode() => ErrorMessage.GetHashCode();
 
-        public override string ToString()
-        {
-            return ErrorMessage;
-        }
+        public override string ToString() => ErrorMessage;
     }
 }

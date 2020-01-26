@@ -30,7 +30,9 @@
                 </thead>
                 <tbody></tbody>
             </table>
+            <div id="paginator" class="d-flex justify-content-center"></div>
         </div>
+        <div id="edit" class="mt-3 col-6 offset-3 col-md-4 offset-md-4"></div>
     </div>
     <script src="./frontend/hotels.js"></script>
 </body>

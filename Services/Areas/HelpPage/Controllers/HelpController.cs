@@ -1,4 +1,3 @@
-using System;
 using System.Web.Http;
 using System.Web.Mvc;
 using Services.Areas.HelpPage.ModelDescriptions;
@@ -13,15 +12,9 @@ namespace Services.Areas.HelpPage.Controllers
     {
         private const string ErrorViewName = "Error";
 
-        public HelpController()
-            : this(GlobalConfiguration.Configuration)
-        {
-        }
+        public HelpController() : this(GlobalConfiguration.Configuration) { }
 
-        public HelpController(HttpConfiguration config)
-        {
-            Configuration = config;
-        }
+        public HelpController(HttpConfiguration config) { Configuration = config; }
 
         public HttpConfiguration Configuration { get; private set; }
 
@@ -33,30 +26,23 @@ namespace Services.Areas.HelpPage.Controllers
 
         public ActionResult Api(string apiId)
         {
-            if (!String.IsNullOrEmpty(apiId))
+            if (!string.IsNullOrEmpty(apiId))
             {
                 HelpPageApiModel apiModel = Configuration.GetHelpPageApiModel(apiId);
                 if (apiModel != null)
-                {
                     return View(apiModel);
-                }
             }
-
             return View(ErrorViewName);
         }
 
         public ActionResult ResourceModel(string modelName)
         {
-            if (!String.IsNullOrEmpty(modelName))
+            if (!string.IsNullOrEmpty(modelName))
             {
                 ModelDescriptionGenerator modelDescriptionGenerator = Configuration.GetModelDescriptionGenerator();
-                ModelDescription modelDescription;
-                if (modelDescriptionGenerator.GeneratedModels.TryGetValue(modelName, out modelDescription))
-                {
+                if (modelDescriptionGenerator.GeneratedModels.TryGetValue(modelName, out ModelDescription modelDescription))
                     return View(modelDescription);
-                }
             }
-
             return View(ErrorViewName);
         }
     }

@@ -1,16 +1,8 @@
-// Uncomment the following to provide samples for PageResult<T>. Must also add the Microsoft.AspNet.WebApi.OData
-// package to your project.
+// Uncomment the following to provide samples for PageResult<T>. Must also add the Microsoft.AspNet.WebApi.OData package to your project.
 ////#define Handle_PageResultOfT
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Net.Http.Headers;
-using System.Reflection;
-using System.Web;
 using System.Web.Http;
 #if Handle_PageResultOfT
 using System.Web.Http.OData;
@@ -55,9 +47,7 @@ namespace Services.Areas.HelpPage
             // Extend the following to use a preset object directly as the sample for all actions that support a media
             // type, regardless of the body parameter or return type. The lines below avoid display of binary content.
             // The BsonMediaTypeFormatter (if available) is not used to serialize the TextSample object.
-            config.SetSampleForMediaType(
-                new TextSample("Binary JSON content. See http://bsonspec.org for details."),
-                new MediaTypeHeaderValue("application/bson"));
+            config.SetSampleForMediaType(new TextSample("Binary JSON content. See http://bsonspec.org for details."), new MediaTypeHeaderValue("application/bson"));
 
             //// Uncomment the following to use "[0]=foo&[1]=bar" directly as the sample for all actions that support form URL encoded format
             //// and have IEnumerable<string> as the body parameter or return type.

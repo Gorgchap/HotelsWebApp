@@ -45,6 +45,7 @@
     <Compile Include="HotelModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoomModel.cs" />
+    <Compile Include="NewHotelModel.cs" />
     <Compile Include="UserModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

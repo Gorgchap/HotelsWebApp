@@ -1,12 +1,9 @@
-using System;
-using System.Reflection;
-
 namespace Services.Areas.HelpPage.ModelDescriptions
 {
     public interface IModelDocumentationProvider
     {
-        string GetDocumentation(MemberInfo member);
+        string GetDocumentation(System.Reflection.MemberInfo member);
 
-        string GetDocumentation(Type type);
+        string GetDocumentation(System.Type type);
     }
 }

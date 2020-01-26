@@ -1,5 +1,3 @@
-using System;
-
 namespace Services.Areas.HelpPage
 {
     /// <summary>
@@ -7,31 +5,14 @@ namespace Services.Areas.HelpPage
     /// </summary>
     public class TextSample
     {
-        public TextSample(string text)
-        {
-            if (text == null)
-            {
-                throw new ArgumentNullException("text");
-            }
-            Text = text;
-        }
+        public TextSample(string text) { Text = text ?? throw new System.ArgumentNullException("text"); }
 
         public string Text { get; private set; }
 
-        public override bool Equals(object obj)
-        {
-            TextSample other = obj as TextSample;
-            return other != null && Text == other.Text;
-        }
+        public override bool Equals(object obj) => obj is TextSample other && Text == other.Text;
 
-        public override int GetHashCode()
-        {
-            return Text.GetHashCode();
-        }
+        public override int GetHashCode() => Text.GetHashCode();
 
-        public override string ToString()
-        {
-            return Text;
-        }
+        public override string ToString() => Text;
     }
 }

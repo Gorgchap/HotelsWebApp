@@ -4,7 +4,7 @@ namespace TestServices
 {
     public class TestHotelsService : Interfaces.IHotelsService
     {
-        public PagedResult<HotelModel> GetHotels()
+        public PagedResult<HotelModel> GetHotels(int page = 1, int pageLen = 5)
         {
             return new PagedResult<HotelModel>(new HotelModel[]
             {

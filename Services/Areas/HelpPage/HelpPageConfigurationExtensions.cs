@@ -178,9 +178,7 @@ namespace Services.Areas.HelpPage
         /// <returns>The help page sample generator.</returns>
         public static HelpPageSampleGenerator GetHelpPageSampleGenerator(this HttpConfiguration config)
         {
-            return (HelpPageSampleGenerator)config.Properties.GetOrAdd(
-                typeof(HelpPageSampleGenerator),
-                k => new HelpPageSampleGenerator());
+            return (HelpPageSampleGenerator)config.Properties.GetOrAdd(typeof(HelpPageSampleGenerator), k => new HelpPageSampleGenerator());
         }
 
         /// <summary>
@@ -203,9 +201,7 @@ namespace Services.Areas.HelpPage
         /// <returns>The <see cref="ModelDescriptionGenerator"/></returns>
         public static ModelDescriptionGenerator GetModelDescriptionGenerator(this HttpConfiguration config)
         {
-            return (ModelDescriptionGenerator)config.Properties.GetOrAdd(
-                typeof(ModelDescriptionGenerator),
-                k => InitializeModelDescriptionGenerator(config));
+            return (ModelDescriptionGenerator)config.Properties.GetOrAdd(typeof(ModelDescriptionGenerator), k => InitializeModelDescriptionGenerator(config));
         }
 
         /// <summary>
@@ -218,36 +214,29 @@ namespace Services.Areas.HelpPage
         /// </returns>
         public static HelpPageApiModel GetHelpPageApiModel(this HttpConfiguration config, string apiDescriptionId)
         {
-            object model;
             string modelId = ApiModelPrefix + apiDescriptionId;
-            if (!config.Properties.TryGetValue(modelId, out model))
+            if (!config.Properties.TryGetValue(modelId, out object model))
             {
                 Collection<ApiDescription> apiDescriptions = config.Services.GetApiExplorer().ApiDescriptions;
-                ApiDescription apiDescription = apiDescriptions.FirstOrDefault(api => String.Equals(api.GetFriendlyId(), apiDescriptionId, StringComparison.OrdinalIgnoreCase));
+                ApiDescription apiDescription = apiDescriptions.FirstOrDefault(api => string.Equals(api.GetFriendlyId(), apiDescriptionId, StringComparison.OrdinalIgnoreCase));
                 if (apiDescription != null)
                 {
                     model = GenerateApiModel(apiDescription, config);
                     config.Properties.TryAdd(modelId, model);
                 }
             }
-
             return (HelpPageApiModel)model;
         }
 
         private static HelpPageApiModel GenerateApiModel(ApiDescription apiDescription, HttpConfiguration config)
         {
-            HelpPageApiModel apiModel = new HelpPageApiModel()
-            {
-                ApiDescription = apiDescription,
-            };
-
+            HelpPageApiModel apiModel = new HelpPageApiModel() { ApiDescription = apiDescription };
             ModelDescriptionGenerator modelGenerator = config.GetModelDescriptionGenerator();
             HelpPageSampleGenerator sampleGenerator = config.GetHelpPageSampleGenerator();
             GenerateUriParameters(apiModel, modelGenerator);
             GenerateRequestModelDescription(apiModel, modelGenerator, sampleGenerator);
             GenerateResourceDescription(apiModel, modelGenerator);
             GenerateSamples(apiModel, sampleGenerator);
-
             return apiModel;
         }
 
@@ -289,34 +278,23 @@ namespace Services.Areas.HelpPage
                     //     public int Y { get; set; }
                     // }
                     // Regular complex class Point will have properties X and Y added to UriParameters collection.
-                    if (complexTypeDescription != null
-                        && !IsBindableWithTypeConverter(parameterType))
+                    if (complexTypeDescription != null && !IsBindableWithTypeConverter(parameterType))
                     {
                         foreach (ParameterDescription uriParameter in complexTypeDescription.Properties)
-                        {
                             apiModel.UriParameters.Add(uriParameter);
-                        }
                     }
                     else if (parameterDescriptor != null)
                     {
-                        ParameterDescription uriParameter =
-                            AddParameterDescription(apiModel, apiParameter, typeDescription);
-
+                        ParameterDescription uriParameter = AddParameterDescription(apiModel, apiParameter, typeDescription);
                         if (!parameterDescriptor.IsOptional)
-                        {
                             uriParameter.Annotations.Add(new ParameterAnnotation() { Documentation = "Required" });
-                        }
-
                         object defaultValue = parameterDescriptor.DefaultValue;
                         if (defaultValue != null)
-                        {
                             uriParameter.Annotations.Add(new ParameterAnnotation() { Documentation = "Default value is " + Convert.ToString(defaultValue, CultureInfo.InvariantCulture) });
-                        }
                     }
                     else
                     {
                         Debug.Assert(parameterDescriptor == null);
-
                         // If parameterDescriptor is null, this is an undeclared route parameter which only occurs
                         // when source is FromUri. Ignored in request model and among resource parameters but listed
                         // as a simple string here.
@@ -327,18 +305,9 @@ namespace Services.Areas.HelpPage
             }
         }
 
-        private static bool IsBindableWithTypeConverter(Type parameterType)
-        {
-            if (parameterType == null)
-            {
-                return false;
-            }
+        private static bool IsBindableWithTypeConverter(Type parameterType) => parameterType == null ? false : TypeDescriptor.GetConverter(parameterType).CanConvertFrom(typeof(string));
 
-            return TypeDescriptor.GetConverter(parameterType).CanConvertFrom(typeof(string));
-        }
-
-        private static ParameterDescription AddParameterDescription(HelpPageApiModel apiModel,
-            ApiParameterDescription apiParameter, ModelDescription typeDescription)
+        private static ParameterDescription AddParameterDescription(HelpPageApiModel apiModel, ApiParameterDescription apiParameter, ModelDescription typeDescription)
         {
             ParameterDescription parameterDescription = new ParameterDescription
             {
@@ -346,7 +315,6 @@ namespace Services.Areas.HelpPage
                 Documentation = apiParameter.Documentation,
                 TypeDescription = typeDescription,
             };
-
             apiModel.UriParameters.Add(parameterDescription);
             return parameterDescription;
         }
@@ -362,15 +330,11 @@ namespace Services.Areas.HelpPage
                     apiModel.RequestModelDescription = modelGenerator.GetOrCreateModelDescription(parameterType);
                     apiModel.RequestDocumentation = apiParameter.Documentation;
                 }
-                else if (apiParameter.ParameterDescriptor != null &&
-                    apiParameter.ParameterDescriptor.ParameterType == typeof(HttpRequestMessage))
+                else if (apiParameter.ParameterDescriptor != null && apiParameter.ParameterDescriptor.ParameterType == typeof(HttpRequestMessage))
                 {
                     Type parameterType = sampleGenerator.ResolveHttpRequestMessageType(apiDescription);
-
                     if (parameterType != null)
-                    {
                         apiModel.RequestModelDescription = modelGenerator.GetOrCreateModelDescription(parameterType);
-                    }
                 }
             }
         }
@@ -380,9 +344,7 @@ namespace Services.Areas.HelpPage
             ResponseDescription response = apiModel.ApiDescription.ResponseDescription;
             Type responseType = response.ResponseType ?? response.DeclaredType;
             if (responseType != null && responseType != typeof(void))
-            {
                 apiModel.ResourceDescription = modelGenerator.GetOrCreateModelDescription(responseType);
-            }
         }
 
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "The exception is recorded as ErrorMessages.")]
@@ -395,7 +357,6 @@ namespace Services.Areas.HelpPage
                     apiModel.SampleRequests.Add(item.Key, item.Value);
                     LogInvalidSampleAsError(apiModel, item.Value);
                 }
-
                 foreach (var item in sampleGenerator.GetSampleResponses(apiModel.ApiDescription))
                 {
                     apiModel.SampleResponses.Add(item.Key, item.Value);
@@ -429,13 +390,11 @@ namespace Services.Areas.HelpPage
                 HelpPageSampleGenerator sampleGenerator = config.GetHelpPageSampleGenerator();
                 resourceType = sampleGenerator.ResolveHttpRequestMessageType(apiDescription);
             }
-
             if (resourceType == null)
             {
                 parameterDescription = null;
                 return false;
             }
-
             return true;
         }
 
@@ -444,24 +403,15 @@ namespace Services.Areas.HelpPage
             ModelDescriptionGenerator modelGenerator = new ModelDescriptionGenerator(config);
             Collection<ApiDescription> apis = config.Services.GetApiExplorer().ApiDescriptions;
             foreach (ApiDescription api in apis)
-            {
-                ApiParameterDescription parameterDescription;
-                Type parameterType;
-                if (TryGetResourceParameter(api, config, out parameterDescription, out parameterType))
-                {
+                if (TryGetResourceParameter(api, config, out ApiParameterDescription parameterDescription, out Type parameterType))
                     modelGenerator.GetOrCreateModelDescription(parameterType);
-                }
-            }
             return modelGenerator;
         }
 
         private static void LogInvalidSampleAsError(HelpPageApiModel apiModel, object sample)
         {
-            InvalidSample invalidSample = sample as InvalidSample;
-            if (invalidSample != null)
-            {
+            if (sample is InvalidSample invalidSample)
                 apiModel.ErrorMessages.Add(invalidSample.ErrorMessage);
-            }
         }
     }
 }
