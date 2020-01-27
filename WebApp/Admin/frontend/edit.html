@@ -13,9 +13,26 @@
             return false;
         }
         if (temp === -1) {
-            console.log('POST');
+            $.ajax({
+                url: url, type: 'POST', data: {
+                    name: $("#new-name").val(), city: $("#new-city").val(), address: $("#new-address").val(),
+                    rating: Math.round(+$("#new-rating").val() > 5 ? 5 : +$("#new-rating").val() < 1 ? 1 : +$("#new-rating").val())
+                },
+                success: () => { alert("New hotel added successfully"); loadData(); }
+            });
         } else {
-            console.log('PUT');
+            $.ajax({
+                url: url + "/" + temp, type: 'PUT', data: {
+                    name: $("#new-name").val(), city: $("#new-city").val(), address: $("#new-address").val(),
+                    rating: Math.round(+$("#new-rating").val() > 5 ? 5 : +$("#new-rating").val() < 1 ? 1 : +$("#new-rating").val())
+                },
+                success: () => { alert("Hotel with id " + temp + " updated successfully"); loadData(); },
+                error: body => {
+                    switch (body.status) {
+                        case 404: alert("Source was not found on server"); break;
+                    }
+                }
+            });
         }
     }
 </script>

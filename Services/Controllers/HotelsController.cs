@@ -31,14 +31,26 @@ namespace Services.Controllers
 
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [HttpPost]
-        public void Post([FromBody]string order)
+        public HttpResponseMessage Post([FromBody]NewHotelModel m)
         {
+            using (HotelsContext c = new HotelsContext())
+            {
+                c.Hotel.Add(new Hotel() { Name = m.Name, City = m.City, Address = m.Address, Rating = m.Rating });
+                c.SaveChanges(); return Request.CreateResponse(HttpStatusCode.OK);
+            }
         }
 
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [HttpPut]
-        public void Put(int id, [FromBody]string order)
+        public HttpResponseMessage Put(int id, [FromBody]NewHotelModel m)
         {
+            using (HotelsContext c = new HotelsContext())
+            {
+                Hotel h = (from hotel in c.Hotel where hotel.Id == id select hotel).FirstOrDefault();
+                if (h == null) return Request.CreateResponse(HttpStatusCode.NotFound);
+                h.Name = m.Name; h.City = m.City; h.Address = m.Address; h.Rating = m.Rating;
+                c.SaveChanges(); return Request.CreateResponse(HttpStatusCode.OK);
+            }
         }
 
         [EnableCors(origins: "*", headers: "*", methods: "*")]
@@ -56,7 +68,7 @@ namespace Services.Controllers
                 }
             }
             catch (System.Data.Entity.Infrastructure.DbUpdateException dbex) { return Request.CreateResponse(HttpStatusCode.Conflict, dbex.ToString()); }
-            catch (System.Exception e) { return Request.CreateResponse(HttpStatusCode.InternalServerError, e.ToString()); }
+            
         }
     }
 }

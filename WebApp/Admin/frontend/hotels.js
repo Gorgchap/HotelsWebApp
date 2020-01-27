@@ -19,22 +19,23 @@ function loadData() {
         }
         $(".text-info").click(e => { temp = $(e.target).attr("item-id"); $("#edit").load("frontend/edit.html"); });
         $(".text-danger").click(e => {
-            const id = $(e.target).attr("item-id");
-            $.ajax({
-                url: url + "/" + id,
-                type: 'DELETE',
-                success: () => {
-                    alert("Hotel with id " + id + " deleted");
-                    loadData();
-                },
-                error: body => {
-                    switch (body.status) {
-                        case 409: alert("There's dependent information in database"); break;
-                        case 500: alert("Server error"); break;
+            const id = $(e.target).attr("item-id"); $("#edit").empty();
+            if (confirm('Are you going to delete hotel with id ' + id + '?')) {
+                $.ajax({
+                    url: url + "/" + id,
+                    type: 'DELETE',
+                    success: () => {
+                        alert("Hotel with id " + id + " deleted");
+                        loadData();
+                    },
+                    error: body => {
+                        switch (body.status) {
+                            case 409: alert("There's dependent information in database"); break;
+                            case 500: alert("Server error"); break;
+                        }
                     }
-                    $("#edit").empty();
-                }
-            });
+                });
+            }
         });
     });
 }
