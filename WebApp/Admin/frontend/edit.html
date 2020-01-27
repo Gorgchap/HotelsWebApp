@@ -7,6 +7,16 @@
     <button id="save" onclick="save()" class="btn btn-primary mx-auto">Save</button>
 </div>
 <script>
+    if (temp > -1) 
+        $.ajax({
+            url: url + "/" + temp, type: 'GET',
+            success: data => {
+                document.getElementById('new-name').value = data.Name,
+                document.getElementById('new-city').value = data.City,
+                document.getElementById('new-address').value = data.Address,
+                document.getElementById('new-rating').value = data.Rating.split("★").length - 1
+            }
+        });
     function save() {
         if ($("#new-name").val() === '' || $("#new-city").val() === '' || $("#new-address").val() === '' || $("#new-rating").val() === '') {
             alert('Please fill the form!');
