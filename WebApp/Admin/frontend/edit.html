@@ -1,8 +1,21 @@
 ﻿<div class="card px-3 py-1">
-    <h4 id="header" class="text-center">Add</h4>
+    <h4 id="header" class="text-center"></h4>
     <input type="text" id="new-name" class="my-1" placeholder="New name" />
-    <input type="text" id="new-name" class="my-1" placeholder="New city" />
+    <input type="text" id="new-city" class="my-1" placeholder="New city" />
     <textarea type="text" id="new-address" class="my-1" placeholder="New address" />
     <input type="number" min="1" max="5" id="new-rating" class="my-1" placeholder="New rating" />
-    <button id="save" class="btn btn-primary mx-auto">Save</button>
+    <button id="save" onclick="save()" class="btn btn-primary mx-auto">Save</button>
 </div>
+<script>
+    function save() {
+        if ($("#new-name").val() === '' || $("#new-city").val() === '' || $("#new-address").val() === '' || $("#new-rating").val() === '') {
+            alert('Please fill the form!');
+            return false;
+        }
+        if (temp === -1) {
+            console.log('POST');
+        } else {
+            console.log('PUT');
+        }
+    }
+</script>

@@ -1,4 +1,4 @@
-﻿const url = 'https://localhost:44394/api/hotels'; let page = 1, pc = 0;
+﻿const url = 'https://localhost:44394/api/hotels'; let page = 1, pc = 0, temp = -1;
 
 function loadData() {
     $(".card > table > tbody").empty(); $("#edit").empty();
@@ -6,7 +6,8 @@ function loadData() {
     $(".card > table > tbody").load("frontend/spinner.html");
     $.get("frontend/hotel-item.html", data => $.template("info", data));
     $.getJSON(url + "?page=" + page, obj => {
-        $.tmpl("info", obj.Page).appendTo(".card > table > tbody"); pc = obj.PageCount;
+        $.tmpl("info", obj.Page).appendTo(".card > table > tbody"); $("#spinner").hide();
+        pc = obj.PageCount; if (page > pc) { page--; loadData(); } temp = -1;
         if (pc === 1) {
             $("#paginator").empty();
         } else {
@@ -16,7 +17,26 @@ function loadData() {
             $("#forward").click(() => { if (page < pc) { page++; loadData(); } });
             $("#last").click(() => { if (page != pc) { page = pc; loadData(); } });
         }
-        $("#spinner").hide();
+        $(".text-info").click(e => { temp = $(e.target).attr("item-id"); $("#edit").load("frontend/edit.html"); });
+        $(".text-danger").click(e => {
+            const id = $(e.target).attr("item-id");
+            $.ajax({
+                url: url + "/" + id,
+                type: 'DELETE',
+                success: () => {
+                    alert("Hotel with id " + id + " deleted");
+                    loadData();
+                },
+                error: body => {
+                    switch (body.status) {
+                        case 409: alert("There's dependent information in database"); break;
+                        case 500: alert("Server error"); break;
+                    }
+                    $("#edit").empty();
+                }
+            });
+        });
     });
 }
+$(".text-success").click(() => { temp = -1; $("#edit").load("frontend/edit.html"); })
 $(window).on('load', () => loadData());

@@ -82,7 +82,6 @@
     <Content Include="Admin\AdminNavbar.ascx" />
     <Content Include="Admin\BookingsPage.aspx" />
     <Content Include="Admin\frontend\edit.html" />
-    <Content Include="Admin\frontend\hotel-info.html" />
     <Content Include="Admin\frontend\hotel-item.html" />
     <Content Include="Admin\frontend\spinner.html" />
     <Content Include="Admin\HotelsPage.aspx" />
