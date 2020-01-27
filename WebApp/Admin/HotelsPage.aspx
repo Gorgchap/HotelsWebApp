@@ -30,7 +30,13 @@
                 </thead>
                 <tbody></tbody>
             </table>
-            <div id="paginator" class="d-flex justify-content-center"></div>
+            <div id="paginator" class="d-flex justify-content-center">
+                <a href="#" id="first">First</a>
+                <a href="#" id="back" class="mx-3">Back</a>
+                <span id="info"></span>
+                <a href="#" id="forward" class="mx-3">Forward</a>
+                <a href="#" id="last">Last</a>
+            </div>
         </div>
         <div id="edit" class="mt-3 col-6 offset-3 col-md-4 offset-md-4"></div>
     </div>

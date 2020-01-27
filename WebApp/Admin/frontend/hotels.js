@@ -1,20 +1,22 @@
-﻿const url = 'https://localhost:44394/api/hotels';
-let page = 1, pc = 0;
+﻿const url = 'https://localhost:44394/api/hotels'; let page = 1, pc = 0;
 
 function loadData() {
-    $(".card > table > tbody").empty();
-    $("#paginator").empty();
-    $("#editable").empty();
+    $(".card > table > tbody").empty(); $("#edit").empty();
+    $("#first").unbind(); $("#back").unbind(); $("#forward").unbind(); $("#last").unbind();
     $(".card > table > tbody").load("frontend/spinner.html");
-    $("#editable").load("frontend/edit.html");
     $.get("frontend/hotel-item.html", data => $.template("info", data));
-    $.getJSON(url, obj => {
-        $.tmpl("info", obj.Page).appendTo(".card > table > tbody");
-        pc = obj.PageCount;
+    $.getJSON(url + "?page=" + page, obj => {
+        $.tmpl("info", obj.Page).appendTo(".card > table > tbody"); pc = obj.PageCount;
+        if (pc === 1) {
+            $("#paginator").empty();
+        } else {
+            $("#info").text('Page ' + page + ' of ' + pc);
+            $("#first").click(() => { if (page != 1) { page = 1; loadData(); } });
+            $("#back").click(() => { if (page > 1) { page--; loadData(); } });
+            $("#forward").click(() => { if (page < pc) { page++; loadData(); } });
+            $("#last").click(() => { if (page != pc) { page = pc; loadData(); } });
+        }
         $("#spinner").hide();
-        $(".card > #paginator").show();
-        $("#paginator").load("frontend/paginator.html");
     });
 }
-
 $(window).on('load', () => loadData());

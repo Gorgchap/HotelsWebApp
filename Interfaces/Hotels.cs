@@ -4,6 +4,6 @@ namespace Interfaces
 {
     public interface IHotelsService
     {
-        PagedResult<HotelModel> GetHotels(int page = 1, int pageLen = 5);
+        PagedResult<HotelModel> GetHotels(int page = 1, int len = 5);
     }
 }
